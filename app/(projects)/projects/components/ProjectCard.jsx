@@ -3,6 +3,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { FaExternalLinkAlt, FaGooglePlay, FaGithub } from 'react-icons/fa';
+import Image from 'next/image';
 import { itemAnimation } from './Animations';
 
 export const ProjectCard = ({ project, index, onClick }) => (
@@ -13,9 +14,11 @@ export const ProjectCard = ({ project, index, onClick }) => (
     >
         <div className="sm:w-1/3">
             <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
-                <img
+                <Image
                     src={project.image}
                     alt={project.title}
+                    width={400}
+                    height={300}
                     className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-300" />

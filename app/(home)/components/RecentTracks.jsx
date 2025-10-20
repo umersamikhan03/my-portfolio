@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { HiMusicNote, HiOutlineClock } from 'react-icons/hi';
 import useSWR from 'swr';
+import Image from 'next/image';
 
 const containerAnimation = {
     hidden: { opacity: 0 },
@@ -127,9 +128,11 @@ const RecentTracks = () => {
                     >
                         <div className="flex gap-3">
                             <div className="relative flex-shrink-0">
-                                <img
+                                <Image
                                     src={track.track.album.images[0].url}
                                     alt={track.track.name}
+                                    width={64}
+                                    height={64}
                                     className="w-16 h-16 rounded-lg shadow-lg"
                                     loading="lazy"
                                 />

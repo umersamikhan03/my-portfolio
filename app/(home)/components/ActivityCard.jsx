@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 const ActivityCard = ({
     icon: Icon,
@@ -49,9 +50,11 @@ const ActivityCard = ({
             <div className="flex items-center gap-5 justify-center">
                 {image && (
                     <div className="flex-shrink-0">
-                        <img
+                        <Image
                             src={image}
                             alt={imageAlt}
+                            width={80}
+                            height={80}
                             className="w-20 h-20 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300"
                         />
                     </div>

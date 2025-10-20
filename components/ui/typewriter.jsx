@@ -30,7 +30,7 @@ export const TypewriterEffect = ({
                 ease: "easeInOut",
             });
         }
-    }, [isInView]);
+    }, [isInView, animate]);
 
     const renderWords = () => {
         return (

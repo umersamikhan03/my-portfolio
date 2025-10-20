@@ -3,6 +3,7 @@ import React from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { FaExternalLinkAlt, FaGooglePlay, FaGithub } from 'react-icons/fa';
+import Image from 'next/image';
 
 export const ProjectDetailsModal = ({ project, open, onOpenChange }) => {
     if (!project) return null;
@@ -24,9 +25,11 @@ export const ProjectDetailsModal = ({ project, open, onOpenChange }) => {
                 <div className="space-y-6">
                     {/* Project Image */}
                     <div className="relative rounded-lg overflow-hidden border border-border">
-                        <img
+                        <Image
                             src={project.image}
                             alt={project.title}
+                            width={800}
+                            height={500}
                             className="object-contain w-full max-h-[500px]"
                         />
                     </div>

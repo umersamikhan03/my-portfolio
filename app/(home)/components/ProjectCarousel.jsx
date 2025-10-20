@@ -3,6 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { config } from '@/config';
 import Link from 'next/link';
+import Image from 'next/image';
 import { HiExternalLink } from 'react-icons/hi';
 
 const ProjectCarousel = () => {
@@ -39,9 +40,11 @@ const ProjectCarousel = () => {
               <Link href="/projects">
                 <div className="relative overflow-hidden rounded-xl bg-secondary/5 border border-zinc-800/50 hover:border-zinc-700/50 transition-all duration-300 group-hover:scale-105">
                   <div className="aspect-[4/3] relative overflow-hidden">
-                    <img
+                    <Image
                       src={project.image}
                       alt={project.title}
+                      width={256}
+                      height={192}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

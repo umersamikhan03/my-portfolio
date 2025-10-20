@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 export async function POST(request) {
   try {
@@ -32,7 +32,7 @@ export async function POST(request) {
     }
 
     // Send email using Resend
-    const { data, error } = await resend.emails.send({
+    const { data, error } = await resend?.emails.send({
       from: 'Portfolio Contact <onboarding@resend.dev>', // You'll need to verify your domain
       to: [process.env.EMAIL_USER || 'umersamikhan03@gmail.com'],
       replyTo: email,

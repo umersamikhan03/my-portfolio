@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { HiCode, HiArrowRight, HiDeviceMobile } from 'react-icons/hi';
 import { config } from '@/config';
 import Link from 'next/link';
+import Image from 'next/image';
 import { BackgroundPresets } from '@/components/ui/background-effects';
 import { motion } from 'framer-motion';
 import ProjectCarousel from './ProjectCarousel';
@@ -70,9 +71,11 @@ const HeroSection = () => {
             className="flex justify-center mb-6"
           >
             <div className="relative">
-              <img
+              <Image
                 src="/projects/my-image.png"
                 alt="Umer Bin Sami"
+                width={128}
+                height={128}
                 className="w-32 h-32 rounded-full object-cover border-4 border-primary/20 shadow-2xl"
               />
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-transparent" />
