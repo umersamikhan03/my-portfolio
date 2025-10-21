@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { HiMusicNote, HiOutlineClock } from 'react-icons/hi';
 import useSWR from 'swr';
@@ -34,7 +34,9 @@ const fetcher = async (url) => {
     return res.json();
 };
 
-const formatTimeAgo = (timestamp) => {
+const formatTimeAgo = (timestamp, isClient = true) => {
+    if (!isClient) return "Loading...";
+    
     const now = new Date();
     const playedAt = new Date(timestamp);
     const diff = now - playedAt;
@@ -49,6 +51,7 @@ const formatTimeAgo = (timestamp) => {
 };
 
 const RecentTracks = () => {
+    const [isClient, setIsClient] = useState(false);
     const { data, error, isLoading } = useSWR('/api/spotify/recent-tracks', fetcher, {
         refreshInterval: 60000,
         revalidateOnFocus: true,
@@ -56,6 +59,10 @@ const RecentTracks = () => {
     });
 
     const recentTracks = data?.items?.slice(0, 6) || [];
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
 
     if (error) {
         return (
@@ -147,7 +154,7 @@ const RecentTracks = () => {
                                 </p>
                                 <div className="flex items-center gap-1 mt-2 text-xs text-zinc-500">
                                     <HiOutlineClock className="w-3 h-3" />
-                                    {formatTimeAgo(track.played_at)}
+                                    {formatTimeAgo(track.played_at, isClient)}
                                 </div>
                             </div>
                         </div>

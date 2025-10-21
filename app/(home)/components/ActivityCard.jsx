@@ -14,24 +14,31 @@ const ActivityCard = ({
     endTime
 }) => {
     const [currentProgress, setCurrentProgress] = useState(0);
+    const [isClient, setIsClient] = useState(false);
     const duration = endTime - startTime;
 
     useEffect(() => {
-        if (!isSpotify || !startTime || !endTime) return;
+        setIsClient(true);
+    }, []);
 
-        setCurrentProgress(Date.now() - startTime);
+    useEffect(() => {
+        if (!isClient || !isSpotify || !startTime || !endTime) return;
 
-        const interval = setInterval(() => {
-            const newProgress = Date.now() - startTime;
-            if (newProgress >= duration) {
-                clearInterval(interval);
-            } else {
-                setCurrentProgress(newProgress);
+        const updateProgress = () => {
+            const now = Date.now();
+            const progress = now - startTime;
+            setCurrentProgress(progress);
+            
+            if (progress >= duration) {
+                return;
             }
-        }, 1000);
+        };
+
+        updateProgress();
+        const interval = setInterval(updateProgress, 1000);
 
         return () => clearInterval(interval);
-    }, [isSpotify, startTime, endTime, duration]);
+    }, [isClient, isSpotify, startTime, endTime, duration]);
 
     const formatTime = (ms) => {
         const seconds = Math.floor((ms / 1000) % 60);

@@ -10,8 +10,15 @@ const LanyardPlayer = () => {
         vscode: null
     });
     const [loading, setLoading] = useState(true);
+    const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    useEffect(() => {
+        if (!isClient) return;
+
         const ws = new WebSocket('wss://api.lanyard.rest/socket');
 
         ws.onopen = () => {
@@ -45,7 +52,7 @@ const LanyardPlayer = () => {
         return () => {
             ws.close();
         };
-    }, []);
+    }, [isClient]);
 
     if (loading) {
         return (
